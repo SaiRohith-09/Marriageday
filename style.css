@@ -1,128 +1,165 @@
-/* General Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-/* Body Styling */
-body {
-    background: linear-gradient(135deg, #2b5876, #4e4376);
-    font-family: 'Arial', sans-serif;
+  }
+  
+  body {
+    background: linear-gradient(to bottom right, #00bcd4, #ff5722); /* Vibrant background colors */
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Segoe UI', sans-serif;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     align-items: center;
-    height: 70vh;
-    overflow: hidden;
-    padding-top: 100px;
-    max-height: 100vh; /* Prevent overflow */
-}
-
-/* h1 Styling */
-h1 {
-    font-size: 32px;
-    font-weight: bold;
-    text-align: center;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    width: 90%;
-    max-width: 360px;
-    background: linear-gradient(to right, #6dd5ed, #2193b0);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    text-shadow: 0 0 10px #6dd5ed, 0 0 20px #2193b0;
-    animation: glowText 1.5s ease-in-out infinite alternate;
-    margin-bottom: 10px; /* Reduced space */
-}
-
-/* Glow Animation */
-@keyframes glowText {
-    from { text-shadow: 0 0 10px #6dd5ed; }
-    to { text-shadow: 0 0 20px #2193b0; }
-}
-
-/* Slideshow Container */
-.slideshow-container {
+    justify-content: center;
     position: relative;
-    width: 100%;
-    max-width: 360px;
-    margin: 0 auto;
-    border-radius: 12px;
-    overflow: hidden;
-    background-color: #ffffff10;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
-    flex-shrink: 0;
-}
-
-/* Slide animations */
-@keyframes zoomIn {
-    0% { transform: scale(1.1); opacity: 0; }
-    100% { transform: scale(1); opacity: 1; }
-}
-@keyframes slideUp {
-    0% { transform: translateY(50px); opacity: 0; }
-    100% { transform: translateY(0); opacity: 1; }
-}
-@keyframes rotateIn {
-    0% { transform: rotate(-10deg); opacity: 0; }
-    100% { transform: rotate(0deg); opacity: 1; }
-}
-
-/* Slide Style */
-.slide {
-    display: none;
-    animation-duration: 2s;
-    animation-fill-mode: forwards;
-}
-.slide:nth-child(3n+1) { animation: zoomIn 2s ease forwards; }
-.slide:nth-child(3n+2) { animation: slideUp 2s ease forwards; }
-.slide:nth-child(3n+3) { animation: rotateIn 2s ease forwards; }
-.slide:nth-child(3n+4) { animation: zoomIn 2s ease forwards; }
-.slide:nth-child(3n+5) { animation: slideUp 2s ease forwards; }
-.slide:nth-child(3n+6) { animation: rotateIn 2s ease forwards; }
-
-/* Image */
-img {
-    width: 100%;
-    height: 400px;
-    object-fit: cover;
-    border-radius: 12px;
-}
-
-/* Navigation */
-.prev, .next {
-    position: absolute;
-    top: 50%;
-    padding: 12px;
-    font-size: 20px;
-    color: #fff;
-    background-color: rgba(0, 0, 50, 0.5);
-    border: none;
+    text-align: center;
+  }
+  
+  /* Anniversary text styles */
+  .anniversary-text {
+    font-size: 2rem; /* Text size */
+    color: #d81b60;
+    margin-bottom: 150px; /* Increased margin for more space */
+    font-weight: bold;
+    text-shadow: 0 0 25px #ff4081;
+    z-index: 2;
+    animation: fadeIn 2s ease-in-out;
+  }
+  
+  /* Fade-in animation for the anniversary text */
+  @keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(-20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  
+  /* Cake container style */
+  .cake-container {
+    text-align: center;
     cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .cake-container:hover {
+    transform: scale(1.1);
+  }
+  
+  /* Cake layers */
+  .cake {
+    width: 220px;
+    position: relative;
+    z-index: 1;
+  }
+  
+  /* Cake layers */
+  .layer {
+    width: 100%;
+    height: 60px;
+    border-radius: 15px;
+    margin-bottom: -25px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.25);
+  }
+  
+  .base {
+    background: linear-gradient(to top, #4e342e, #6d4c41);
+  }
+  
+  .middle {
+    background: linear-gradient(to top, #ec407a, #f48fb1);
+  }
+  
+  .top {
+    background: linear-gradient(to top, #fff9c4, #fff176);
+  }
+  
+  /* Icing with sprinkles */
+  .icing {
+    width: 100%;
+    height: 30px;
+    background: #fff;
+    border-radius: 20px 20px 0 0;
+    position: absolute;
+    top: -15px;
+    z-index: 2;
+    overflow: hidden;
+  }
+  
+  .sprinkles {
+    width: 100%;
+    height: 100%;
+    background-image: 
+      radial-gradient(#ff5252 2px, transparent 0),
+      radial-gradient(#ffca28 2px, transparent 0),
+      radial-gradient(#66bb6a 2px, transparent 0),
+      radial-gradient(#42a5f5 2px, transparent 0),
+      radial-gradient(#ab47bc 2px, transparent 0);
+    background-size: 20px 20px;
+    background-position: 5px 5px, 15px 10px, 10px 15px, 2px 12px, 12px 2px;
+  }
+  
+  /* Candle */
+  .candle {
+    width: 12px;
+    height: 45px;
+    background: #ddd;
+    border-radius: 2px;
+    position: absolute;
+    top: -45px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    animation: floatCandle 3s ease-in-out infinite;
+  }
+  
+  @keyframes floatCandle {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-8px); }
+  }
+  
+  /* Flame */
+  .flame {
+    width: 16px;
+    height: 26px;
+    background: radial-gradient(circle, #fff176 0%, #ff8f00 60%);
     border-radius: 50%;
-    transform: translateY(-50%);
-    transition: 0.3s ease;
-}
-.prev:hover, .next:hover {
-    background-color: rgba(0, 0, 100, 0.8);
-}
-.prev { left: 10px; }
-.next { right: 10px; }
-
-/* Hide audio player */
-audio {
-    display: none;
-}
-
-/* Mobile adjustments */
-@media (max-width: 400px) {
-    h1 {
-        font-size: 28px;
-        margin-bottom: 5px;
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: flicker 1s infinite;
+    box-shadow: 0 0 30px 10px #ffca28;
+  }
+  
+  @keyframes flicker {
+    0%, 100% { transform: scale(1) translateX(-50%); }
+    50% { transform: scale(1.2) translateX(-50%) rotate(1deg); }
+  }
+  
+  /* Mobile adjustments */
+  @media (max-width: 500px) {
+    .cake {
+      width: 180px;
     }
-    img {
-        height: 300px;
+  
+    .layer {
+      height: 50px;
+      border-radius: 12px;
     }
-}
+  
+    .flame {
+      width: 12px;
+      height: 20px;
+    }
+  
+    .candle {
+      width: 10px;
+      height: 35px;
+    }
+  
+    .anniversary-text {
+      font-size: 1.6rem;
+      margin-bottom: 120px; /* Adjusted for smaller screens */
+    }
+  }
+  
