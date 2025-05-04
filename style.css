@@ -162,4 +162,10 @@
       margin-bottom: 120px; /* Adjusted for smaller screens */
     }
   }
+
+  h2{
+    align-items: center;
+    color: #1ed9c0d0;
+    margin-top: 40px;
+  }
   
