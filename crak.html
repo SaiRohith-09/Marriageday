@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday!</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+ body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #000;
+  overflow: hidden;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.birthday-container {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  text-align: center;
+  color: white;
+  z-index: 2;
+}
+
+.wish {
+  position: absolute;
+  top: 40%;
+  width: 100%;
+  font-size: 2.5rem;
+  opacity: 0; /* Initially hidden */
+  animation: popup 0.8s ease-out forwards, glow 1.5s ease-in-out infinite alternate;
+  z-index: 10;
+}
+
+/* Pop-up animation */
+@keyframes popup {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Glowing text effect */
+@keyframes glow {
+  from { text-shadow: 0 0 10px #ff9, 0 0 20px #f06; }
+  to   { text-shadow: 0 0 20px #fff, 0 0 30px #f0f; }
+}
+
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+#startButton {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  background: #f06;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  z-index: 20;
+}
+    /* Hiding the video tag */
+    video {
+      display: none;
+    }
+.svg-heart-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 4;
+}
+
+.svg-heart {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  opacity: 0.7;
+  animation: floatHearts 6s infinite ease-in;
+  fill: #ff4d6d;
+}
+
+/* Floating heart animation */
+@keyframes floatHearts {
+  0% {
+    transform: translateY(100vh) scale(0.8) rotate(0deg);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-10vh) scale(1.2) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Random positions and timings */
+.svg-heart:nth-child(1) { left: 10%; animation-delay: 0s; }
+.svg-heart:nth-child(2) { left: 20%; animation-delay: 1s; }
+.svg-heart:nth-child(3) { left: 30%; animation-delay: 2s; }
+.svg-heart:nth-child(4) { left: 40%; animation-delay: 3s; }
+.svg-heart:nth-child(5) { left: 50%; animation-delay: 4s; }
+.svg-heart:nth-child(6) { left: 60%; animation-delay: 5s; }
+.svg-heart:nth-child(7) { left: 70%; animation-delay: 6s; }
+.svg-heart:nth-child(8) { left: 80%; animation-delay: 1.5s; }
+.svg-heart:nth-child(9) { left: 90%; animation-delay: 3.5s; }
+.svg-heart:nth-child(10){ left: 95%; animation-delay: 5.5s; }
+
+
+  </style>
+</head>
+
+<body>
+<div class="birthday-container" style="display: none;">
+  <h1 class="wish">🎉 Happy Birthday Amma 💖</h1>
+  <canvas id="fireworks"></canvas>
+  <video id="fireworks-video" loop>
+    <source src="sound.mp4" type="video/mp4">
+  </video>
+</div>
+<svg style="display: none;">
+  <symbol id="heart-icon" viewBox="0 0 32 29.6">
+    <path fill="red" d="M23.6,0c-3.1,0-5.9,1.9-7.6,4.7C14.3,1.9,11.5,0,8.4,0C3.8,0,0,3.8,0,8.4c0,4.5,3.5,8.2,8.8,13.2L16,29.6
+      l7.2-8C28.5,16.6,32,12.9,32,8.4C32,3.8,28.2,0,23.6,0z"/>
+  </symbol>
+</svg>
+
+<div class="svg-heart-container">
+  <!-- Add more for density -->
+  <svg class="svg-heart"><use xlink:href="#heart-icon"/></svg>
+  <svg class="svg-heart"><use xlink:href="#heart-icon"/></svg>
+  <svg class="svg-heart"><use xlink:href="#heart-icon"/></svg>
+  <svg class="svg-heart"><use xlink:href="#heart-icon"/></svg>
+  <svg class="svg-heart"><use xlink:href="#heart-icon"/></svg>
+  <svg class="svg-heart"><use xlink:href="#heart-icon"/></svg>
+  <svg class="svg-heart"><use xlink:href="#heart-icon"/></svg>
+  <svg class="svg-heart"><use xlink:href="#heart-icon"/></svg>
+  <svg class="svg-heart"><use xlink:href="#heart-icon"/></svg>
+  <svg class="svg-heart"><use xlink:href="#heart-icon"/></svg>
+</div>
+
+</body>
+<script>
+  const canvas = document.getElementById("fireworks");
+  const ctx = canvas.getContext("2d");
+  const birthdayContainer = document.querySelector(".birthday-container");
+  const video = document.getElementById("fireworks-video");
+
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  let particles = [];
+
+  function createFirework() {
+    const x = Math.random() * canvas.width;
+    const y = Math.random() * canvas.height / 2;
+    const count = 200;
+
+    video.currentTime = 0;
+    video.play();
+
+    for (let i = 0; i < count; i++) {
+      const angle = Math.random() * 2 * Math.PI;
+      const speed = Math.random() * 5 + 3;
+      const particle = {
+        x,
+        y,
+        dx: Math.cos(angle) * speed,
+        dy: Math.sin(angle) * speed,
+        life: 100,
+        size: Math.random() * 4 + 1,
+        color: `hsl(${Math.random() * 360}, 100%, 50%)`,
+        opacity: 1,
+      };
+      particles.push(particle);
+    }
+  }
+
+  function animate() {
+    requestAnimationFrame(animate);
+    ctx.fillStyle = "rgba(0, 0, 0, 0.2)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    particles.forEach((p, i) => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = p.opacity;
+      ctx.fill();
+
+      p.x += p.dx;
+      p.y += p.dy;
+      p.opacity *= 0.98;
+      p.life--;
+
+      if (p.life <= 0 || p.opacity <= 0) particles.splice(i, 1);
+    });
+
+    if (Math.random() < 0.05) createFirework();
+  }
+
+  // Start fireworks automatically when the page loads
+  window.onload = function() {
+    birthdayContainer.style.display = "block";  // Show the birthday container
+    animate(); // Start the fireworks animation
+  };
+</script>
+
+</html>
